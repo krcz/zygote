@@ -70,6 +70,8 @@ Later:
 * create abstractions for commonly used programming patterns.
 
 One day:
-* full coverage of ISO C11 language,
-* functional language in the abstract layer,
+* usable functional constructions in the abstract layer,
 * moving away from Racket.
+
+Non-goals:
+* full coverage of ISO C11 language - it might be done in a follow-up project using other underlying technology (probably mix with other Zygote subprojects).
