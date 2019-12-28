@@ -16,7 +16,7 @@
         (assignment-expression (assignment-operator "=") (var-name "n") (integer-literal 10)))
       (for-statement
         (assignment-expression (assignment-operator "=") (var-name "i") (integer-literal 1))
-        (binary-expression (binary-operator "<=") (var-name "i") (var-name "n"))
-        (unary-expression (unary-operator "++") (var-name "i"))
+        (binary-expression '<= (var-name "i") (var-name "n"))
+        (unary-expression '++ (var-name "i"))
         (compound-statement (list
           (expression-statement (call-expression (var-name "f") (list (var-name "i") (var-name "n")))))))))))

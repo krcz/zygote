@@ -49,9 +49,7 @@
   #:transparent)
 
 ; ISO unary-expression
-(struct unary-operator
-  ([op : String])
-  #:transparent)
+(define-type unary-operator (U '+ '- '++ '--))
 
 (define-type unary-expression+ (U unary-expression postfix-expression+))
 (struct unary-expression
@@ -65,21 +63,26 @@
    [ex : cast-expression+])
   #:transparent)
 
-(define binary-operators (list
-  (list "*" "/" "%")
-  (list "+" "-")
-  (list "<<" ">>")
-  (list "<" ">" "<=" ">=")
-  (list "==" "!=")
-  (list "&")
-  (list "^")
-  (list "|")
-  (list "&&")
-  (list "||")))
 
-(struct binary-operator
-  ([op : String])
-  #:transparent)
+(define-type binary-operator (U '* '/ '% '+ '- '<< '>> '< '> '<= '>= '== '!= 'bin-and 'bin-xor 'bin-or 'logical-and 'logical-or))
+(: binary-operators (Listof (Listof binary-operator)))
+(define binary-operators (list
+  (list '* '/ '%)
+  (list '+ '-)
+  (list  '<< '>>)
+  (list  '< '> '<= '>=)
+  (list  '== '!=)
+  (list  'bin-and)
+  (list  'bin-xor)
+  (list  'bin-or)
+  (list  'logical-and)
+  (list  'logical-or)))
+(define (stronger-operator? left right)
+  (let rec : Boolean ([bl : (Listof (Listof binary-operator)) binary-operators])
+    (let
+      ([contains-left? : Boolean (not (not (member left (car bl))))]
+       [contains-right? : Boolean (not (not (member right (car bl))))])
+      (if (not (equal? contains-left? contains-right?)) contains-left? (rec (cdr bl))))))
 
 (define-type binary-expression+ (U binary-expression cast-expression+))
 (struct binary-expression
