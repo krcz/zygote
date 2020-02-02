@@ -142,4 +142,4 @@
            (render-stat body))]))
 
 (: to-stdout (All (T U) (-> (-> Renderer T Any) T Void)))
-(define (to-stdout f v) (f (Renderer (current-output-port) #f) v) (void))
+(define (to-stdout f v) (f (Renderer (current-output-port) #f) v) (newline (current-output-port)) (void))

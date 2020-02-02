@@ -1,5 +1,6 @@
 #lang typed/racket
 
+(require "utils.rkt")
 (provide (all-defined-out))
 
 (struct integer-literal
@@ -21,7 +22,7 @@
 (define-type primary-expression (U bracketed-expression var-name integer-literal))
 
 (struct bracketed-expression
-  ([ex : expression])
+  ([ex : expression+])
   #:transparent)
 
 ; ISO postfix-expression
@@ -77,12 +78,8 @@
   (list  'bin-or)
   (list  'logical-and)
   (list  'logical-or)))
-(define (stronger-operator? left right)
-  (let rec : Boolean ([bl : (Listof (Listof binary-operator)) binary-operators])
-    (let
-      ([contains-left? : Boolean (not (not (member left (car bl))))]
-       [contains-right? : Boolean (not (not (member right (car bl))))])
-      (if (not (equal? contains-left? contains-right?)) contains-left? (rec (cdr bl))))))
+(: stronger-operator? (-> binary-operator binary-operator Boolean))
+(define stronger-operator? (lower-in-tower binary-operators))
 
 (define-type binary-expression+ (U binary-expression cast-expression+))
 (struct binary-expression
