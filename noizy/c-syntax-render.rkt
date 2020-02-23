@@ -59,7 +59,7 @@
   [(indexing-expression ex index) (~> r (render-ex ex) (ro 'lbracket) (render-ex index) (ro 'rbracket))]
   [(access-expression ex field) (~> r (render-ex ex) (ro 'comma) (render-ex field))]
   [(postfix-expression ex op) (~> r (render-ex ex) (ro op))]
-  [(assignment-expression op left right) (~> r (render-ex left) (ro (assignment-operator-op op)) (render-ex right))]
+  [(assignment-expression op left right) (~> r (render-ex left) (ro op) (render-ex right))]
   [(conditional-expression condition left right) (~> r (render-ex condition) (ro '?) (render-ex left) (ro ':) (render-ex right))] 
   [(binary-expression op left right) (~> r (render-ex left) (ro op) (render-ex right))] 
   [(cast-expression type exx) (~> r (ro 'lparen) (ro (type-name-name type)) (ro 'rparen) (render-ex exx))] 

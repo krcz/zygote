@@ -94,9 +94,7 @@
    [left : expression]
    [right : conditional-expression+]))
 
-(struct assignment-operator
-  ([op : String])
-  #:transparent)
+(define-type assignment-operator (U '= '+= '-= '*= '/= '%= '<<= '>>= 'and-= 'xor-= 'or-=))
 
 (define-type assignment-expression+ (U assignment-expression conditional-expression+))
 (struct assignment-expression

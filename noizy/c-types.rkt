@@ -5,6 +5,10 @@
 (provide (all-defined-out))
 
 (define-type ct:Type (U builtin-type))
+(: ct:get-specifiers (-> ct:Type (Listof cs:declaration-specifier)))
+(define (ct:get-specifiers type) (match type
+    ((builtin-type specifiers) specifiers)))
+
 (struct builtin-type
   ([specifiers : (Listof cs:type-specifier)])
   #:transparent)
