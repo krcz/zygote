@@ -257,6 +257,26 @@
             [(processing-result prctx repr) (cons prctx (cons repr litems))])))])
     (processing-result rctx (cs:compound-statement (reverse ritems)))))
 
+(struct function-definition
+  ([name : String]
+   [return-type : ct:Type]
+   [parameters : (Listof variable)]
+   [body : block])
+  #:transparent)
+
+(: function-definition-process (-> function-definition Context (processing-result cs:function-definition)))
+(define (function-definition-process fdef ctx)
+  (match-let*
+    ([(function-definition name return-type parameters body) fdef]
+     [par-decls (map (lambda ([v : variable]) (cs:parameter-declaration (ct:get-specifiers (variable-type v)) (cs:var-name (variable-name v)))) parameters)]
+     [(processing-result ctx2 body-repr) (block-process body ctx)])
+    (processing-result ctx2
+      (cs:function-definition
+        (ct:get-specifiers return-type)
+        (cs:fun-declarator (cs:var-name name) par-decls #f)
+        (list)
+        body-repr))))
+
 ;(define + (case lambda
 ;  [([a : expression])]
 ;  [([a : expression] [b : expression])]
