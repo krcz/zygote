@@ -1,0 +1,12 @@
+[package]
+name = "zyntax-rust"
+version = "0.1.0"
+authors = ["Marcin Kurczych <krcz@krcz.eu>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+regex = "1"
+itertools = "0.10.0"
