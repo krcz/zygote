@@ -17,7 +17,7 @@ pub(crate) struct Pos {
     column: usize,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub(crate) struct PosAware<T> {
     pub value: T,
     pub start: Pos,

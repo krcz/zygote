@@ -3,7 +3,7 @@ use super::lexing::LexemeExtractor;
 use std::char;
 use std::fmt::Debug;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub(crate) enum ZLexeme<'a> {
     Id(&'a str),
     Number(&'a str),
@@ -95,7 +95,7 @@ impl<'a> LexemeExtractor<'a, ZLexeme<'a>> for ZWhitespaceExtractor {
         self.regex
     }
 
-    fn extract(&self, s: &'a str) -> Option<ZLexeme<'a>> {
+    fn extract(&self, _s: &'a str) -> Option<ZLexeme<'a>> {
         None
     }
 }
